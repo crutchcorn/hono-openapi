@@ -2,21 +2,11 @@ import { serve } from '@hono/node-server'
 import {app} from "./shared.ts";
 import { openAPISpecs } from 'hono-openapi'
 import { apiReference } from '@scalar/hono-api-reference'
+import {openAPIOptions} from "./constants/open-api.ts";
 
 app.get(
   '/openapi',
-  openAPISpecs(app, {
-    documentation: {
-      info: {
-        title: 'Hono API',
-        version: '1.0.0',
-        description: 'Greeting API',
-      },
-      servers: [
-        { url: 'http://localhost:3000', description: 'Local Server' },
-      ],
-    },
-  })
+  openAPISpecs(app, openAPIOptions)
 )
 
 app.get(

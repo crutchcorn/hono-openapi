@@ -1,14 +1,16 @@
 {
-  "name": "hono-codegen",
+  "name": "hono-openapi",
   "type": "module",
   "scripts": {
     "dev": "node --experimental-strip-types ./src/node.ts",
     "build": "esbuild --bundle --outfile=./dist/aws-lambda.js --platform=node --target=node20 ./src/aws-lambda.ts",
     "zip": "zip -j lambda.zip dist/aws-lambda.js",
     "update": "aws lambda update-function-code --zip-file fileb://lambda.zip --function-name hello",
-    "deploy": "run-s build zip update"
+    "deploy": "run-s build zip update",
+    "gen:openapi": "node  --experimental-strip-types ./scripts/generate-openapi-spec.ts"
   },
   "devDependencies": {
+    "@types/node": "^22.13.10",
     "esbuild": "^0.21.4",
     "npm-run-all2": "^6.2.0",
     "typescript": "^5.8.2"
